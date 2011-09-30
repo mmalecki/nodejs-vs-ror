@@ -47,10 +47,12 @@ var template =
   "        <div class='span8'>" +
   "          <h1><a href='https://github.com/joyent/node'>node.js</a></h1>" +
   "          <h2>%(nodejs)</h2>" +
+  "          <p>GitHub watchers<p>" +
   "        </div>" +
   "        <div class='span8'>" +
   "          <h1><a href='https://github.com/rails/rails'>Ruby on Rails</a></h1>" +
   "          <h2>%(ror)</h2>" +
+  "          <p>GitHub watchers<p>" +
   "        </div>" +
   "      </div>" +
   "      <div class='row'>" +
