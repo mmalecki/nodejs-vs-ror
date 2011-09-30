@@ -1,7 +1,10 @@
 var http = require('http'),
     url = require('url'),
     async = require('async'),
+    static = require('node-static'),
     request = require('request');
+
+var fileServer = new (static.Server)('./public');
 
 http.createServer(function (req, res) {
   var parsed = url.parse(req.url, true);
@@ -30,6 +33,11 @@ http.createServer(function (req, res) {
         return res.end(parsed.query.jsonp + '(' + response + ');');
       }
       res.end(response);
+    });
+  }
+  else {
+    req.on('end', function () {
+      fileServer.serve(req, res);
     });
   }
 }).listen(8000);
