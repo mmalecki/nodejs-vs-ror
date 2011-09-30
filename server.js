@@ -1,6 +1,10 @@
 var http = require('http'),
     async = require('async'),
-    request = require('request');
+    request = require('request'),
+    cacheInterval = 1000 * 60;
+
+var cache = {};
+setInterval(function () { cache = {}; }, cacheInterval);
 
 // ghetto called, they want their template back!
 var template = 
@@ -41,6 +45,10 @@ http.createServer(function (req, res) {
   var ror, nodejs;
 
   res.writeHead(200, {'Content-Type': 'text/html'});
+  if (cache.output) {
+    return res.end(cache.output);
+  }
+
   async.parallel({
     ror: function (callback) {
       request(
@@ -61,7 +69,8 @@ http.createServer(function (req, res) {
       );
     }
   }, function (err, watchers) {
-    res.end(template.replace('%(nodejs)', watchers.nodejs).replace('%(ror)', watchers.ror)); // lol
+    cache.output = template.replace('%(nodejs)', watchers.nodejs).replace('%(ror)', watchers.ror); // lol
+    res.end(cache.output);
   });
 }).listen(8000);
 
