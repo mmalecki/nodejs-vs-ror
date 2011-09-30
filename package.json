@@ -4,13 +4,15 @@
   "scripts": {
     "start": "server.js"
   },
-  "version": "0.0.2",
+  "version": "0.0.2-3",
   "dependencies": {
     "async": "*",
-    "request": "*"
+    "request": "*",
+    "node-static": "git://github.com/Marak/node-static.git"
   },
   "devDependencies": {},
   "engines": {
     "node": "*"
   }
 }
+
