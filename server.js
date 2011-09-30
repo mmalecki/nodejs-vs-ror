@@ -31,6 +31,14 @@ var template =
   "      .span8 {" +
   "        text-align: center;" +
   "      }" +
+  "      .bottom {" +
+  "        position: absolute;" +
+  "        bottom: 0px;" +
+  "        right: 0px;" +
+  "        background-color: #98AFC7;" +
+  "        padding: 8px;" +
+  "        border-top-left-radius: 8px;" +
+  "      }" +
   "    </style>" +
   "  </head>" +
   "  <body>" +
@@ -45,11 +53,13 @@ var template =
   "          <h2>%(ror)</h2>" +
   "        </div>" +
   "      </div>" +
-  "      <div class='row'>" +
-  "        <div class='span4 offset12'>" +
-  "          <p>by Maciej Małecki: <a href='https://twitter.com/maciejmalecki'>Twitter</a>, <a href='https://github.com/mmalecki'>GitHub</a>" +
-  "        </div>" +
-  "      </div>" +
+  "    </div>" +
+  "    <div class='bottom'>" +
+  "      <p style='margin: 0px'>" +
+  "        by Maciej Małecki: <a rel='me' href='https://twitter.com/maciejmalecki'>Twitter</a>, <a rel='me' href='https://github.com/mmalecki'>GitHub</a>" +
+  "        <br />" +
+  "        <a href='https://github.com/mmalecki/nodejs-vs-ror'>Source</a>" +
+  "      </p>" +
   "    </div>" +
   "  </body>" +
   "</html>";
