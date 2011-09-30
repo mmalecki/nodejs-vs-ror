@@ -41,7 +41,17 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
+    <script type='text/javascript' src='jquery.min.js'></script>
+    <script type='text/javascript' src='jquery.tmpl.js'></script>
     <script type='text/javascript' src='knockout-1.2.1.js'></script>
+
+    <script type='text/x-jquery-tmpl' id='compareTemplate'>
+      {{if ror > nodejs}}
+        Not quite there... yet!
+      {{else}}
+        Wooooooooo!
+      {{/if}}
+    </script>
   </head>
   <body>
     <div class='container'>
@@ -55,6 +65,11 @@
           <h1><a href='https://github.com/rails/rails'>Ruby on Rails</a></h1>
           <h2 data-bind="text: ror">...</h2>
           <p>GitHub watchers<p>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='span16'>
+          <h1 style='margin-top: 128px' data-bind="template: 'compareTemplate'">...</h1>
         </div>
       </div>
     </div>
