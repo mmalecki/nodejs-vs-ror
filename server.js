@@ -15,6 +15,19 @@ var template =
   "    <title>node.js vs RoR</title>" +
   "    <link rel='stylesheet' href='http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css'>" +
   "    <style type='text/css'>" +
+  "      html, body {" +
+  "        height: 100%;" +  // indeed, CSS.
+  "      }" +
+  "      .container {" +
+  "        position: relative;" +
+  "        top: 40%;" +
+  "      }" +
+  "      h1 {" +
+  "        font-size: 52px" +
+  "      }" +
+  "      h2 {" +
+  "        font-size: 42px;" +
+  "      }" +
   "      .span8 {" +
   "        text-align: center;" +
   "      }" +
