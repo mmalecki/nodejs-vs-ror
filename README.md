@@ -7,7 +7,9 @@ Compare number of [node.js](https://github.com/joyent/node) and [Ruby on Rails](
 ## API
 Now with an API (it's more like a side effect of using [knockout.js](http://knockoutjs.com/), but if you like outsourcing your nerdfight:
 
-### `/api`
+### Endpoints
+
+#### `/api`
 
 Parameters:
 
