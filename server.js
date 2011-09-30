@@ -28,7 +28,7 @@ var template =
   "      h2 {" +
   "        font-size: 42px;" +
   "      }" +
-  "      .span8 {" +
+  "      .span8, .span16 {" +
   "        text-align: center;" +
   "      }" +
   "      .bottom {" +
@@ -51,6 +51,11 @@ var template =
   "        <div class='span8'>" +
   "          <h1><a href='https://github.com/rails/rails'>Ruby on Rails</a></h1>" +
   "          <h2>%(ror)</h2>" +
+  "        </div>" +
+  "      </div>" +
+  "      <div class='row'>" +
+  "        <div class='span16'>" +
+  "          <h1 style='margin-top: 128px'>%(text)</h1>" +
   "        </div>" +
   "      </div>" +
   "    </div>" +
@@ -92,7 +97,11 @@ http.createServer(function (req, res) {
       );
     }
   }, function (err, watchers) {
-    cache.output = template.replace('%(nodejs)', watchers.nodejs).replace('%(ror)', watchers.ror); // lol
+    var text = (watchers.ror > watchers.nodejs) ? "Not quite there... yet!" : "Wooooooooo!";
+    cache.output = template
+                   .replace('%(nodejs)', watchers.nodejs)
+                   .replace('%(ror)', watchers.ror)
+                   .replace('%(text)', text);
     res.end(cache.output);
   });
 }).listen(8000);
