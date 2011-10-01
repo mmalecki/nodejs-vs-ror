@@ -6,26 +6,21 @@ var http = require('http'),
 
 var fileServer = new (static.Server)('./public');
 
+function getRepoFollowers(repo, callback) {
+  request(
+    'http://github.com/api/v2/json/repos/show/' + repo,
+    function (error, response, body) {
+      callback(null, JSON.parse(body).repository.watchers);
+    }
+  );
+}
+
 http.createServer(function (req, res) {
   var parsed = url.parse(req.url, true);
   if (parsed.pathname == '/api') {
     async.parallel({
-      ror: function (callback) {
-        request(
-          'http://github.com/api/v2/json/repos/show/rails/rails',
-          function (error, response, body) {
-            callback(null, JSON.parse(body).repository.watchers);
-          }
-        );
-      },
-      nodejs: function (callback) {
-        request(
-          'http://github.com/api/v2/json/repos/show/joyent/node',
-          function (error, response, body) {
-            callback(null, JSON.parse(body).repository.watchers);
-          }
-        );
-      }
+      ror: getRepoFollowers.bind({}, 'rails/rails'),
+      nodejs: getRepoFollowers.bind({}, 'joyent/node')
     }, function (err, watchers) {
       var response = JSON.stringify(watchers);
       res.writeHead(200, {'Content-Type': 'application/json'});
