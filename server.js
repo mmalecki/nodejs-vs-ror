@@ -4,13 +4,37 @@ var http = require('http'),
     static = require('node-static'),
     request = require('request');
 
-var fileServer = new (static.Server)('./public');
+var fileServer = new (static.Server)('./public'),
+    cacheInterval = 60 * 1000,
+    cache = { valid: true };
+
+setInterval(function () { cache.valid = false; }, cacheInterval);
 
 function getRepoFollowers(repo, callback) {
+  if (cache.valid && cache[repo] !== undefined) {
+    return callback(null, cache[repo]);
+  }
   request(
     'http://github.com/api/v2/json/repos/show/' + repo,
     function (error, response, body) {
-      callback(null, JSON.parse(body).repository.watchers);
+      var repoData;
+      try {
+        repoData = JSON.parse(body);
+      }
+      catch (e) {
+        error = e;
+      }
+      if (error) {
+        //
+        // When error occured always return value from a cache and silently
+        // ignore an error
+        //
+        console.error(error);
+        return (cache[repo] !== undefined) ?
+          callback(null, cache[repo]) : callback(error, null);
+      }
+      cache[repo] = repoData.repository.watchers;
+      callback(null, repoData.repository.watchers);
     }
   );
 }
