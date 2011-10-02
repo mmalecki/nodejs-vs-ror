@@ -1,0 +1,30 @@
+html, body {
+  height: 100%;
+}
+
+.container {
+  position: relative;
+  top: 40%;
+}
+
+h1 {
+  font-size: 52px
+}
+
+h2 {
+  font-size: 42px;
+}
+
+.span8, .span16 {
+  text-align: center;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  background-color: #98AFC7;
+  padding: 8px;
+  border-top-left-radius: 8px;
+}
+
