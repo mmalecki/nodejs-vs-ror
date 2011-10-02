@@ -4,8 +4,13 @@ var http = require('http'),
     static = require('node-static'),
     request = require('request');
 
-var fileServer = new (static.Server)('./public'),
-    cacheInterval = 60 * 1000,
+var fileServer = new (static.Server)(
+  './public',
+  { cache: 60 * 60 * 24 * 24 * 24 * 24 * 24 * 24 * 24 * 24 * 7,
+    headers: {'Vary': 'Accept-Encoding'} }
+);
+
+var cacheInterval = 60 * 1000,
     cache = { valid: true };
 
 setInterval(function () { cache.valid = false; }, cacheInterval);
