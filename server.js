@@ -6,8 +6,10 @@ var http = require('http'),
 
 var fileServer = new (static.Server)(
   './public',
-  { cache: 60 * 60 * 24 * 24 * 24 * 24 * 24 * 24 * 24 * 24 * 7,
-    headers: {'Vary': 'Accept-Encoding'} }
+  {
+    cache: 24 * 60 * 60 * 7,
+    headers: { 'Vary': 'Accept-Encoding' }
+  }
 );
 
 var cacheInterval = 60 * 1000,
