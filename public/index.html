@@ -30,7 +30,7 @@
 
     <script type='text/x-jquery-tmpl' id='nWatchersLeftTemplate'>
       {{if ror > nodejs}}
-        Only ${ror - nodejs} watchers left!
+        Only ${ror - nodejs} {{if (ror - nodejs) == 1}}watcher{{else}}watchers{{/if}} left!
       {{/if}}
     </script>
   </head>
