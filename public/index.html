@@ -27,6 +27,12 @@
         Wooooooooo!
       {{/if}}
     </script>
+
+    <script type='text/x-jquery-tmpl' id='nWatchersLeftTemplate'>
+      {{if ror > nodejs}}
+        Only ${ror - nodejs} watchers left!
+      {{/if}}
+    </script>
   </head>
   <body>
     <div class='container'>
@@ -44,7 +50,8 @@
       </div>
       <div class='row'>
         <div class='span16'>
-          <h1 style='margin-top: 128px' data-bind="template: 'compareTemplate'">...</h1>
+          <h1 style='margin-top: 100px' data-bind="template: 'compareTemplate'">...</h1>
+          <small data-bind="template: 'nWatchersLeftTemplate'">...</small>
         </div>
       </div>
     </div>
