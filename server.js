@@ -21,16 +21,10 @@ function getRepoFollowers(repo, callback) {
   if (cache.valid && cache[repo] !== undefined) {
     return callback(null, cache[repo]);
   }
-  request(
-    'http://github.com/api/v2/json/repos/show/' + repo,
-    function (error, response, body) {
-      var repoData;
-      try {
-        repoData = JSON.parse(body);
-      }
-      catch (e) {
-        error = e;
-      }
+  request({
+    url: 'http://github.com/api/v2/json/repos/show/' + repo,
+    json: true
+  }, function (error, response, body) {
       if (error) {
         //
         // When error occured always return value from a cache and silently
@@ -40,8 +34,8 @@ function getRepoFollowers(repo, callback) {
         return (cache[repo] !== undefined) ?
           callback(null, cache[repo]) : callback(error, null);
       }
-      cache[repo] = repoData.repository.watchers;
-      callback(null, repoData.repository.watchers);
+      cache[repo] = body.repository.watchers;
+      callback(null, body.repository.watchers);
     }
   );
 }
