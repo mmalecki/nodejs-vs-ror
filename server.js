@@ -1,12 +1,11 @@
 var http = require('http'),
     url = require('url'),
     async = require('async'),
-    static = require('node-static'),
+    nodeStatic = require('node-static'),
     request = require('request');
 
-var fileServer = new (static.Server)(
-  './public',
-  {
+var fileServer = new nodeStatic.Server(
+  './public', {
     cache: 24 * 60 * 60 * 7,
     headers: { 'Vary': 'Accept-Encoding' }
   }
@@ -42,7 +41,7 @@ function getRepoFollowers(repo, callback) {
 
 http.createServer(function (req, res) {
   var parsed = url.parse(req.url, true);
-  if (parsed.pathname == '/api') {
+  if (parsed.pathname === '/api') {
     async.parallel({
       ror: getRepoFollowers.bind({}, 'rails/rails'),
       nodejs: getRepoFollowers.bind({}, 'joyent/node')
